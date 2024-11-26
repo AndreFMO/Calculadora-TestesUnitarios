@@ -1,33 +1,70 @@
-## Relatório Detalhado do Resultado dos Testes de QTS
 
-A seguir, apresento os resultados do teste realizado para validar as operações matemáticas básicas implementadas no sistema. Além das operações de Adição, Subtração, Multiplicação e Divisão, há também um teste para verificar o tratamento da exceção no caso de divisão por zero, assegurando que o sistema lida corretamente com essa situação.
+## Relatório Detalhado dos Testes de API da Calculadora
 
-### 1. Resultado do teste para a operação de Adição:
+Os testes realizados têm como objetivo verificar se a API da calculadora está funcionando corretamente para as operações de **soma**, **subtração**, **multiplicação** e **divisão**, além de validar o tratamento de exceções, especialmente no caso de uma **divisão por zero**.
 
-Este teste verifica a precisão do sistema ao realizar a soma de dois números. O objetivo é garantir que o cálculo da adição seja feito corretamente, conforme as regras matemáticas esperadas.
+### 1. **Resultado do teste para a operação de Soma**
+
+Este teste verifica se a operação de soma entre dois números retorna o resultado esperado. O cálculo é realizado a partir dos parâmetros `numero1` e `numero2` passados na URL da requisição.
+
+- **Requisição:** `GET /soma?numero1=10&numero2=5`
+- **Resultado Esperado:** 10 + 5 = 15
+- **Status da Resposta:** 200 OK
+- **Resposta do Corpo:** `{"resultado":15.0}`
 
 ![Resultado do teste de Adição](imgs-testes-unitarios/soma.png)
 
-### 2. Resultado do teste para a operação de Subtração:
+### 2. **Resultado do teste para a operação de Subtração**
 
-O teste de subtração avalia se o sistema consegue subtrair dois números corretamente, levando em conta os números positivos e negativos, respeitando a lógica da operação.
+O teste de subtração verifica se a diferença entre dois números é calculada corretamente. Da mesma forma que a soma, os parâmetros `numero1` e `numero2` são fornecidos pela URL da requisição.
+
+- **Requisição:** `GET /subtracao?numero1=10&numero2=5`
+- **Resultado Esperado:** 10 - 5 = 5
+- **Status da Resposta:** 200 OK
+- **Resposta do Corpo:** `{"resultado":5.0}`
 
 ![Resultado do teste de Subtração](imgs-testes-unitarios/subtracao.png)
 
-### 3. Resultado do teste para a operação de Multiplicação:
+### 3. **Resultado do teste para a operação de Multiplicação**
 
-Este teste assegura que o sistema calcula corretamente o produto entre dois números, sem erros de arredondamento ou de cálculo, independentemente de serem números inteiros ou decimais.
+Este teste valida o cálculo da multiplicação entre dois números fornecidos na requisição. A operação deve retornar o produto dos números passados.
+
+- **Requisição:** `GET /multiplicacao?numero1=10&numero2=5`
+- **Resultado Esperado:** 10 * 5 = 50
+- **Status da Resposta:** 200 OK
+- **Resposta do Corpo:** `{"resultado":50.0}`
 
 ![Resultado do teste de Multiplicação](imgs-testes-unitarios/multiplicacao.png)
 
-### 4. Resultado do teste para a operação de Divisão:
+### 4. **Resultado do teste para a operação de Divisão**
 
-Neste teste, a divisão entre dois números é verificada para garantir que o cálculo seja preciso. O sistema deve realizar a operação corretamente, levando em consideração tanto inteiros quanto decimais.
+Este teste valida a operação de divisão entre dois números, com a verificação de que o sistema calcula corretamente o quociente entre os números fornecidos na URL da requisição.
+
+- **Requisição:** `GET /divizao?numero1=10&numero2=5`
+- **Resultado Esperado:** 10 / 5 = 2
+- **Status da Resposta:** 200 OK
+- **Resposta do Corpo:** `{"resultado":2.0}`
 
 ![Resultado do teste de Divisão](imgs-testes-unitarios/divisao.png)
 
-### 5. Resultado do teste de Divisão por Zero:
+### 5. **Resultado do teste de Divisão por Zero**
 
-A divisão por zero foi tratada com uma exceção, conforme esperado. Esse teste assegura que o sistema lide corretamente com essa operação inválida, gerando uma mensagem de erro ou outro comportamento adequado.
+Este teste tem como objetivo verificar se a aplicação trata corretamente o caso de divisão por zero. Como a divisão por zero é indefinida, a API deve retornar uma mensagem de erro apropriada com o código de status **400 BadRequest**.
 
-![Resultado do teste de Divisão por zero](imgs-testes-unitarios/divisao_por_zero.png)
+- **Requisição:** `GET /divizao?numero1=10&numero2=0`
+- **Resultado Esperado:** Erro, pois não é possível dividir por zero.
+- **Status da Resposta:** 400 BadRequest
+- **Resposta do Corpo:** `Erro: Não é permitido dividir por zero.`
+
+![Resultado do teste de Divisão por Zero](imgs-testes-unitarios/divisao_por_zero.png)
+
+---
+
+### Considerações Finais:
+
+Os testes mostraram que todas as operações da calculadora funcionam conforme o esperado:
+
+1. As operações de **soma**, **subtração**, **multiplicação** e **divisão** retornam os resultados corretos.
+2. O **tratamento de erro** para divisão por zero está implementado corretamente, retornando um erro com a mensagem adequada e o status **400 BadRequest**.
+
+Esses testes asseguram que a API da calculadora está funcionando corretamente e tratando as exceções de maneira adequada.
